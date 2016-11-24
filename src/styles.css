@@ -19,14 +19,15 @@ body {
 
 .root {
     display: flex;
+    height: 98%;
     padding: 10px 5px;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
 }
 
 .example {
     flex-basis: 300px;
-    height: 340px;
     margin: 3px;
     font-size: 15px;
 }

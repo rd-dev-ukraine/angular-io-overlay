@@ -77,7 +77,6 @@ function positionElement(element: Rect, target: Rect, alignment: Alignment): Rec
         left: targetPoint.left - elementPoint.left,
         top: targetPoint.top - elementPoint.top
     };
-
     return {
         left: element.left + offset.left,
         top: element.top + offset.top,

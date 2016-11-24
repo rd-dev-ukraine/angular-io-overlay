@@ -1,0 +1,30 @@
+{
+  "name": "angular-io-overlay",
+  "version": "1.0.0",
+  "description": "Overlay component that allows open component in popup for angular2",
+  "main": "./src/overlay/overlay.module.ts",
+  "keywords": [
+    "angular",
+    "angular2",
+    "overlay",
+    "popup",
+    "component"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rd-dev-ukraine/angular-io-overlay"
+  },
+  "author": "Sergey Tokarev <sergey.tokarev@rd-dev.net>",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/core": "~2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.42",
+    "typescript": "~2.0.3"
+  },
+  "bugs": {
+    "url": "https://github.com/rd-dev-ukraine/angular-io-overlay/issues"
+  },
+  "homepage": "https://github.com/rd-dev-ukraine/angular-io-overlay#readme"
+}

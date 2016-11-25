@@ -1,11 +1,39 @@
 <div class="example">
     <form #form1="ngForm">
-        <date-picker ngModel name="date"></date-picker>
-
-        <pre><code>&lt;date-picker ngModel name="date"&gt;&lt;/date-picker&gt;
+        <date-picker ngModel name="date" [align]="align"></date-picker>
+        <pre><code>&lt;date-picker&gt;&lt;/date-picker&gt;
 &lt;overlay-host&gt;&lt;/overlay-host&gt;</code></pre>
-        <select name="" id="">
-            <option value=""></option>
-        </select>
     </form>
+    <label class="selectLabel">
+        element horizontal
+        <select [(ngModel)]="align.element.horizontal">
+            <option *ngFor="let align of alignments.horizontal" [ngValue]="align.value">
+                {{ align.name }}
+            </option>
+        </select>
+    </label><br>
+    <label class="selectLabel">
+        element vertical
+        <select [(ngModel)]="align.element.vertical">
+            <option *ngFor="let align of alignments.vertical" [ngValue]="align.value">
+                {{ align.name }}
+            </option>
+        </select>
+    </label><br>
+    <label class="selectLabel">
+        target horizontal
+        <select [(ngModel)]="align.target.horizontal">
+            <option *ngFor="let align of alignments.horizontal" [ngValue]="align.value">
+                {{ align.name }}
+            </option>
+        </select>
+    </label><br>
+    <label class="selectLabel">
+        target vertical
+        <select [(ngModel)]="align.target.vertical">
+            <option *ngFor="let align of alignments.vertical" [ngValue]="align.value">
+                {{ align.name }}
+            </option>
+        </select>
+    </label><br>
 </div>

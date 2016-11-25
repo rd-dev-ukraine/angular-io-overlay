@@ -1,10 +1,8 @@
 export const enum AlignType {
-    Near = 1,
     Left = 1,
     Top = 1,
     Center = 2,
     Middle = 2,
-    Far = 3,
     Right = 3,
     Bottom = 3
 }

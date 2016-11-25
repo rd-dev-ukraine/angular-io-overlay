@@ -49,3 +49,8 @@ code {
 .alert {
     color: red;
 }
+
+.selectLabel {
+    display: flex;
+    justify-content: space-between;
+}

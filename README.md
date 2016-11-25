@@ -1,6 +1,6 @@
 # angular-io-overlay
 
-Overlay component that allows open component in popup for Angular 2.
+Overlay component that allows open a component in popup for Angular 2.
 
 ## Motivation
 
@@ -44,7 +44,7 @@ import { ElementRef, ComponentRef, ViewChild } from "@angular/core";
 import { ComponentThatShouldBeInPopup } from "./foobar";
 ```
 
-Inject `OverlayService` in your constuctor arguments like this.
+Inject `OverlayService` in your constructor arguments like this.
 
 ```typescript
 constructor(private overlayService: OverlayService) {}
@@ -56,7 +56,7 @@ Add a private property `_popupRef`.
 private _popupRef: ComponentRef<any>;
 ```
 
-You will need to add reference to thn element that you will align with. Don't forget use it in your component constructor.
+You will need to add a reference to the element that you will align with. Don't forget use it in your component constructor.
 
 ```angular2html
 <div #alignWithContainer></div>
@@ -66,7 +66,7 @@ You will need to add reference to thn element that you will align with. Don't fo
 @ViewChild("alignWithContainer") alignWithContainer: ElementRef;
 ```
 
-Then add `overlay-host` element where is located your component to your html.
+Then add `overlay-host` element where is located your component to html.
 
 ```angular2html
 <awesomeComponent></awesomeComponent>

@@ -1,7 +1,7 @@
 {
   "name": "angular-io-overlay",
   "version": "1.0.0",
-  "description": "Overlay component that allows open component in popup for angular2",
+  "description": "Overlay component that allows open a component in popup for angular2",
   "main": "./src/overlay/overlay.module.ts",
   "keywords": [
     "angular",

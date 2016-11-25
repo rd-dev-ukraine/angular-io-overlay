@@ -4,7 +4,7 @@ Overlay component that allows open component in popup for Angular 2.
 
 ## Motivation
 
-!!!!!!!!!!!!!!!!!!! 😏
+Existing popups do not work as they should... So we have written another one 😏
 
 ## Installation
 
@@ -16,7 +16,7 @@ npm i angular-io-overlay --save
 
 #### [Demo](https://rd-dev-ukraine.github.io/angular-io-overlay/)
 
-You'll need to add `OverlayModule` to your application module.
+First of all you'll need to add `OverlayModule` to your application module.
 
 ```typescript
 @NgModule({
@@ -31,27 +31,81 @@ You'll need to add `OverlayModule` to your application module.
   bootstrap: [AppComponent]
 })
 
-export class AppModule {
-}
+export class AppModule {}
 ```
 
-And then add `overlay-host` element with options where is located your component to your html:
+After that import `AlignType` and `OverlayService` to your component. 
+Also we need `ElementRef`, `ComponentRef` and `ViewChild` from `@angular/core`.
+And import your component that will be in popup.
 
-```html
+```typescript
+import { AlignType, OverlayService } from "../overlay";
+import { ElementRef, ComponentRef, ViewChild } from "@angular/core";
+import { ComponentThatShouldBeInPopup } from "./foobar";
+```
+
+Inject `OverlayService` in your constuctor arguments like this.
+
+```typescript
+constructor(private overlayService: OverlayService) {}
+```
+
+Add a private property `_popupRef`.
+
+```typescript
+private _popupRef: ComponentRef<any>;
+```
+
+You will need to add reference to thn element that you will align with. Don't forget use it in your component constructor.
+
+```angular2html
+<div #alignWithContainer></div>
+```
+
+```typescript
+@ViewChild("alignWithContainer") alignWithContainer: ElementRef;
+```
+
+Then add `overlay-host` element where is located your component to your html.
+
+```angular2html
 <awesomeComponent></awesomeComponent>
 <overlay-host></overlay-host>
 ```
 
+And now you can use `OverlayService` in your code.
+
+```typescript
+this.overlayService.openComponentInPopup<ComponentThatShouldBeInPopup>(
+            ComponentThatShouldBeInPopup, {
+                alignWithElement: this.alignWithContainer,
+                alignment: {
+                    element: {
+                        horizontal: AlignType.Left,
+                        vertical: AlignType.Top
+                    },
+                    target: {
+                        horizontal: AlignType.Left,
+                        vertical: AlignType.Bottom
+                    }
+                },
+                closeOnClick: true
+            }
+        ).then(c => {
+            this._popupRef = c;
+            this._popupRef.onDestroy(() => {
+                this._popupRef = null;
+            });
+        });
+```
+
 ## API Reference
 
-Options can be passed to an element via html attributes:
-
-|Property         |Type   |Default                                                          |Description                                                                        |
-| :-------------- | :---- | :-------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
-|`mode`           |string |`date`                                                           |Changes view mode - date, datetime, time                                           |
-|`disabled`       |boolean|`false`                                                          |Disables controls                                                                  |
-|`showClearButton`|boolean|`true`                                                           |Show or not clear input button                                                     |
-|`format`         |string | `defaultFormat = {"date": "LL","datetime": "LLL","time": "LT"};`|Changes view format that provides |
+|Property          |Type      |Default    |Description                                                |
+| :--------------- | :------- | :-------- | :-------------------------------------------------------- |
+|`alignWithElement`|ElementRef|`undefined`|Reference to the element that popup will align with        |
+|`alignment`       |Alignment |`defaultAlign: Alignment = {element: {horizontal: AlignType.Left,vertical: AlignType.Top},target: {horizontal: AlignType.Left,vertical: AlignType.Bottom}};`|Align element(Popup) with target(`this.alignWithContainer`)|
+|`closeOnClick`    |boolean   |`true`     |Close popup and destroy thn component on click out of popup|
 
 
 ## License

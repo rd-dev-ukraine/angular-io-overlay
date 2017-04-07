@@ -31,12 +31,12 @@ export class OverlayService {
             alignWithElement: null,
             alignment: {
                 element: {
-                    horizontal: AlignType.Center,
-                    vertical: AlignType.Center
+                    horizontal: AlignType.Left,
+                    vertical: AlignType.Top
                 },
                 target: {
-                    horizontal: AlignType.Center,
-                    vertical: AlignType.Center
+                    horizontal: AlignType.Left,
+                    vertical: AlignType.Bottom
                 }
             },
             closeOnClick: false

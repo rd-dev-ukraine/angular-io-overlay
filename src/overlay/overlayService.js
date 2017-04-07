@@ -22,12 +22,12 @@ var OverlayService = (function () {
             alignWithElement: null,
             alignment: {
                 element: {
-                    horizontal: 2 /* Center */,
-                    vertical: 2 /* Center */
+                    horizontal: 1 /* Left */,
+                    vertical: 1 /* Top */
                 },
                 target: {
-                    horizontal: 2 /* Center */,
-                    vertical: 2 /* Center */
+                    horizontal: 1 /* Left */,
+                    vertical: 3 /* Bottom */
                 }
             },
             closeOnClick: false

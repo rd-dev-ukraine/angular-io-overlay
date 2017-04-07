@@ -83,9 +83,9 @@ function parserFabric(mode: DatePickerMode, format: string): ParserFunction {
         <span class="datepicker-actions" #datePickerContainer>
             <input [value]="inputText"
                    [disabled]="disabled"
-                   (change)="raiseOnChange($event.target.value)"
                    (focus)="openPopup()"
-                   (blur)="onTouched()"
+                   (blur)="onTouched($event.target.value)"
+                   (change)="raiseOnChange($event.target.value)"
                    (keyup.tab)="closePopup()"
                    (keyup.esc)="closePopup()"
                    class="datepicker-actions__input"

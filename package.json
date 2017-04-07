@@ -1,8 +1,9 @@
 {
   "name": "angular-io-overlay",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "description": "Overlay component that allows open a component in popup for angular2",
-  "main": "./src/overlay/index.ts",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
   "keywords": [
     "angular",
     "angular2",
@@ -14,17 +15,38 @@
     "type": "git",
     "url": "git+https://github.com/rd-dev-ukraine/angular-io-overlay"
   },
-  "author": "Sergey Tokarev <sergey.tokarev@rd-dev.net>",
-  "license": "MIT",
-  "dependencies": {
-    "@angular/core": "~2.1.0"
-  },
-  "devDependencies": {
-    "@types/node": "^6.0.42",
-    "typescript": "~2.0.3"
-  },
   "bugs": {
     "url": "https://github.com/rd-dev-ukraine/angular-io-overlay/issues"
   },
-  "homepage": "https://github.com/rd-dev-ukraine/angular-io-overlay#readme"
+  "homepage": "https://github.com/rd-dev-ukraine/angular-io-overlay#readme",
+  "author": "Sergey Tokarev <sergey.tokarev@rd-dev.net>",
+  "license": "MIT",
+  "scripts": {
+    "start": "ng serve",
+    "deploy": "ng build --prod --base-href \"angular-io-overlay\" && ngh",
+    "prepublish": "tsc -p tsconfig.publish.json"
+  },
+  "dependencies": {
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/forms": "^4.0.0",
+    "@angular/http": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/router": "^4.0.0",
+    "core-js": "^2.4.1",
+    "rxjs": "^5.1.0",
+    "moment": "^2.14.1",
+    "zone.js": "^0.8.4"
+  },
+  "devDependencies": {
+    "@angular/cli": "1.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@types/node": "~6.0.60",
+    "codelyzer": "~2.0.0",
+    "ts-node": "~2.0.0",
+    "tslint": "~4.5.0",
+    "typescript": "~2.2.0"
+  }
 }

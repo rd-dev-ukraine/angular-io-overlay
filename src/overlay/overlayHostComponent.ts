@@ -1,11 +1,9 @@
-import {
-    Component, ComponentRef, ComponentFactoryResolver, OnInit, Type, ViewChild, ViewContainerRef, ElementRef
-} from "@angular/core";
+import { Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, ElementRef, OnInit, Type, ViewChild, ViewContainerRef } from "@angular/core";
 
 import { OverlayComponent } from "./overlayComponent";
 import { OverlayHost, OverlayService, PopupOptions } from "./overlayService";
-
 import { Alignment, Point, position, Rect } from "./positioning";
+
 
 @Component({
     selector: "overlay-host",
@@ -13,23 +11,22 @@ import { Alignment, Point, position, Rect } from "./positioning";
     entryComponents: [OverlayComponent]
 })
 export class OverlayHostComponent implements OverlayHost, OnInit {
+    @ViewChild("container", { read: ViewContainerRef })
+    public container: ViewContainerRef;
 
-    @ViewChild("container", { read: ViewContainerRef }) container: ViewContainerRef;
+    public constructor(private overlayService: OverlayService,
+                       private componentFactoryResolver: ComponentFactoryResolver) {
+    }
 
-    constructor(
-        private overlayService: OverlayService,
-        private componentFactoryResolver: ComponentFactoryResolver
-    ) {}
-
-    openComponentInPopup<T>(componentType: Type<T>, options: PopupOptions): Promise<ComponentRef<T>> {
-        return Promise.resolve(this.componentFactoryResolver
-            .resolveComponentFactory<OverlayComponent>(OverlayComponent))
-            .then(factory => this.container.createComponent(factory))
-            .then((overlayRef: ComponentRef<OverlayComponent>) => {
-                return overlayRef.instance
+    public openComponentInPopup<T>(componentType: Type<T>, options: PopupOptions): Promise<ComponentRef<T>> {
+        return Promise.resolve(this.componentFactoryResolver.resolveComponentFactory<OverlayComponent>(OverlayComponent))
+            .then((factory: ComponentFactory<OverlayComponent>) => this.container.createComponent(factory))
+            .then((overlayRef: ComponentRef<OverlayComponent>) =>
+                overlayRef.instance
                     .addComponent<T>(componentType)
                     .then(result => {
-                        this.alignContainer(overlayRef.instance, options.alignWithElement, options.alignment);
+                        OverlayHostComponent.alignContainer(overlayRef.instance, options.alignWithElement, options.alignment);
+
                         result.onDestroy(() => {
                             overlayRef.destroy();
                         });
@@ -37,14 +34,12 @@ export class OverlayHostComponent implements OverlayHost, OnInit {
                         const overlay = overlayRef.location.nativeElement;
 
                         if (options.closeOnClick) {
-
                             const closeOnClickHandler = (e: MouseEvent) => {
-                                if (e.target && (<number>(<any>e.target)["nodeType"]) === 1) {
-                                    const targetElement = <Element>e.target;
-                                    if (!this.isDOMParent(targetElement, overlay)) {
-                                        result.destroy();
-                                        window.removeEventListener("mousedown", closeOnClickHandler);
-                                    }
+                                const target = e.target as HTMLElement;
+
+                                if (target && target.nodeType === 1 && !this.isDOMParent(target, overlay)) {
+                                    result.destroy();
+                                    window.removeEventListener("mousedown", closeOnClickHandler);
                                 }
                             };
 
@@ -52,18 +47,17 @@ export class OverlayHostComponent implements OverlayHost, OnInit {
                         }
 
                         return result;
-                    });
-            });
+                    }));
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.overlayService.registerHost(this);
     }
 
     /**
      * Gets the value indicating whether @{parent} is direct or indirect parent node of the specified @{element}.
      */
-    private isDOMParent(element: Element, parent: Element): boolean {
+    private isDOMParent(element: HTMLElement, parent: HTMLElement): boolean {
         if (!element) {
             throw new Error("Element is required.");
         }
@@ -82,15 +76,15 @@ export class OverlayHostComponent implements OverlayHost, OnInit {
         return this.isDOMParent(element.parentElement, parent);
     }
 
-    private alignContainer(elRef: OverlayComponent, targetRef: ElementRef, alignment: Alignment): void {
+    public static alignContainer(elRef: OverlayComponent, targetRef: ElementRef, alignment: Alignment): void {
         const element: HTMLElement = elRef.elementRef.nativeElement;
 
         if (!element || (targetRef && !targetRef.nativeElement)) {
             return;
         }
-        const elementRect = this.rectFromElement(element);
 
-        const targetRect = targetRef ? this.rectFromElement(targetRef.nativeElement) : this.rectFromWindow();
+        const elementRect = OverlayHostComponent.rectFromElement(element);
+        const targetRect = targetRef ? OverlayHostComponent.rectFromElement(targetRef.nativeElement) : OverlayHostComponent.rectFromWindow();
 
         elRef.positionFixed = !targetRef;
 
@@ -99,7 +93,6 @@ export class OverlayHostComponent implements OverlayHost, OnInit {
         }
 
         const newElementRect = position(elementRect, targetRect, alignment);
-
         const offsetLeft = element.offsetLeft + newElementRect.left - elementRect.left;
         const offsetTop = element.offsetTop + newElementRect.top - elementRect.top;
 
@@ -107,12 +100,12 @@ export class OverlayHostComponent implements OverlayHost, OnInit {
         elRef.top = offsetTop;
     }
 
-    private rectFromElement(element: HTMLElement): Rect {
+    public static rectFromElement(element: HTMLElement): Rect {
         if (!element) {
             throw new Error("Element is undefined.");
         }
 
-        let position: Point = {
+        const position: Point = {
             left: 0,
             top: 0
         };
@@ -122,10 +115,9 @@ export class OverlayHostComponent implements OverlayHost, OnInit {
         do {
             position.left += current.offsetLeft;
             position.top += current.offsetTop;
-            current = <HTMLElement>current.offsetParent;
+            current = current.offsetParent as HTMLElement;
         }
         while (current);
-
 
         return {
             left: position.left,
@@ -135,7 +127,7 @@ export class OverlayHostComponent implements OverlayHost, OnInit {
         };
     }
 
-    private rectFromWindow(): Rect {
+    public static rectFromWindow(): Rect {
         return {
             left: window.scrollX,
             top: window.scrollY,

@@ -7,30 +7,25 @@ export const enum AlignType {
     Bottom = 3
 }
 
-
 export interface ElementAlign {
     horizontal: AlignType;
     vertical: AlignType;
 }
-
 
 export interface Alignment {
     element: ElementAlign;
     target: ElementAlign;
 }
 
-
 export interface Point {
     top: number;
     left: number;
 }
 
-
 export interface Rect extends Point {
     width: number;
     height: number;
 }
-
 
 const defaultAlign: Alignment = {
     element: {
@@ -42,7 +37,6 @@ const defaultAlign: Alignment = {
         vertical: AlignType.Bottom
     }
 };
-
 
 function segmentPositioningPoint(start: number, length: number, align: AlignType): number {
     switch (align) {
@@ -57,7 +51,6 @@ function segmentPositioningPoint(start: number, length: number, align: AlignType
     }
 }
 
-
 function elementPositioningPoint(element: Rect, align: ElementAlign): Point {
     return {
         left: segmentPositioningPoint(element.left, element.width, align.horizontal),
@@ -70,11 +63,11 @@ function elementPositioningPoint(element: Rect, align: ElementAlign): Point {
 function positionElement(element: Rect, target: Rect, alignment: Alignment): Rect {
     const elementPoint = elementPositioningPoint(element, alignment.element);
     const targetPoint = elementPositioningPoint(target, alignment.target);
-
     const offset = {
         left: targetPoint.left - elementPoint.left,
         top: targetPoint.top - elementPoint.top
     };
+
     return {
         left: element.left + offset.left,
         top: element.top + offset.top,

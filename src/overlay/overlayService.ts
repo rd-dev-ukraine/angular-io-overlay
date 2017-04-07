@@ -9,22 +9,20 @@ export interface PopupOptions {
     closeOnClick?: boolean;
 }
 
-
 export interface OverlayHost {
     openComponentInPopup<T>(componentType: Type<T>, options: PopupOptions): Promise<ComponentRef<T>>;
 }
-
 
 /** Adds components in overlay to the HTML tree at position specified by `overlay-host` component. */
 @Injectable()
 export class OverlayService {
     private host: OverlayHost;
 
-    registerHost(hostComponent: OverlayHost): void {
+    public registerHost(hostComponent: OverlayHost): void {
         this.host = hostComponent;
     }
 
-    openComponentInPopup<T>(componentType: Type<any>, options?: PopupOptions): Promise<ComponentRef<T>> {
+    public openComponentInPopup<T>(componentType: Type<any>, options?: PopupOptions): Promise<ComponentRef<T>> {
         if (!this.host) {
             throw new Error("Host is not registered");
         }
@@ -47,6 +45,7 @@ export class OverlayService {
         if (options) {
             opt.alignWithElement = options.alignWithElement || opt.alignWithElement;
             opt.alignment = options.alignment || opt.alignment;
+
             if (options.closeOnClick !== null && options.closeOnClick !== undefined) {
                 opt.closeOnClick = options.closeOnClick;
             }

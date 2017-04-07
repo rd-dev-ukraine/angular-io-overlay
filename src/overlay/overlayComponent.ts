@@ -1,6 +1,4 @@
-import {
-    OnInit, Component, ComponentRef, ComponentFactoryResolver, ElementRef, Type, ViewChild, ViewContainerRef
-} from "@angular/core";
+import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, OnInit, Type, ViewChild, ViewContainerRef } from "@angular/core";
 
 
 @Component({
@@ -12,35 +10,33 @@ import {
     selector: "overlay",
     template: "<template #container></template>",
     styles: [
-        `
+            `
         :host {
-            position: absolute;
-            z-index: 100;
+          position: absolute;
+          z-index: 100;
         }
 
         :host.fixed {
-            position: fixed;
+          position: fixed;
         }
-    `]
+        `
+    ]
 })
 export class OverlayComponent implements OnInit {
     private completeComponentCreation: () => void;
 
-    positionFixed: boolean = false;
-    left: number;
-    top: number;
+    public positionFixed: boolean = false;
+    public left: number;
+    public top: number;
 
+    @ViewChild("container", { read: ViewContainerRef })
+    public container: ViewContainerRef;
 
-    @ViewChild("container", { read: ViewContainerRef }) container: ViewContainerRef;
+    public constructor(private componentFactoryResolver: ComponentFactoryResolver,
+                public elementRef: ElementRef) {}
 
-    constructor(
-        private componentFactoryResolver: ComponentFactoryResolver,
-        public elementRef: ElementRef
-    ) {}
-
-    addComponent<T>(componentType: Type<any>): Promise<ComponentRef<T>> {
+    public addComponent<T>(componentType: Type<any>): Promise<ComponentRef<T>> {
         return new Promise(resolve => {
-
             this.completeComponentCreation = () => {
                 const factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
                 const component = this.container.createComponent(factory);
@@ -49,9 +45,7 @@ export class OverlayComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {
-        if (this.completeComponentCreation) {
-            this.completeComponentCreation();
-        }
+    public ngOnInit(): void {
+        this.completeComponentCreation && this.completeComponentCreation();
     }
 }

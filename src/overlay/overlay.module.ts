@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 
-
 import { OverlayService } from "./overlayService";
 import { OverlayComponent } from "./overlayComponent";
 import { OverlayHostComponent } from "./overlayHostComponent";
@@ -22,4 +21,4 @@ import { OverlayHostComponent } from "./overlayHostComponent";
         OverlayComponent
     ]
 })
-export class OverlayModule { }
+export class OverlayModule {}

@@ -17,7 +17,6 @@ src/main.ts
 src/polyfills.ts
 src/styles.css
 src/tsconfig.app.json
-src/typings.d.ts
 
 # OS generated files
 Thumbs.db

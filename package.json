@@ -1,6 +1,6 @@
 {
   "name": "angular-io-overlay",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Overlay component that allows open a component in popup for angular2",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
@@ -24,7 +24,7 @@
   "scripts": {
     "start": "ng serve",
     "deploy": "ng build --prod --base-href \"angular-io-overlay\" && ngh",
-    "prepublish": "tsc -p tsconfig.publish.json"
+    "prepub": "tsc -p tsconfig.publish.json"
   },
   "dependencies": {
     "@angular/common": "^4.0.0",

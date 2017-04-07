@@ -7,9 +7,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var overlayService_1 = require("./overlayService.d");
+var overlayService_1 = require("./overlayService");
 var overlayComponent_1 = require("./overlayComponent");
-var overlayHostComponent_1 = require("./overlayHostComponent.d");
+var overlayHostComponent_1 = require("./overlayHostComponent");
 var OverlayModule = (function () {
     function OverlayModule() {
     }

@@ -23,6 +23,11 @@
   ],
   "exclude": [
     "node_modules",
-    "example"
+    "src/datepicker",
+    "src/app",
+    "src/environments",
+    "src/main.ts",
+    "src/polyfills.ts",
+    "src/typings.d.ts"
   ]
 }

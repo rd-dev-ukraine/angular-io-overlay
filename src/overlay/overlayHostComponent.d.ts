@@ -1,7 +1,13 @@
-import { ComponentFactoryResolver, ComponentRef, ElementRef, OnInit, Type, ViewContainerRef } from "@angular/core";
+import { Component, ComponentFactoryResolver, ComponentRef, ElementRef, OnInit, Type, ViewContainerRef } from "@angular/core";
 import { OverlayComponent } from "./overlayComponent";
 import { OverlayHost, OverlayService, PopupOptions } from "./overlayService";
 import { Alignment, Rect } from "./positioning";
+
+@Component({
+    selector: "overlay-host",
+    template: "<template #container></template>",
+    entryComponents: [OverlayComponent]
+})
 export declare class OverlayHostComponent implements OverlayHost, OnInit {
     private overlayService;
     private componentFactoryResolver;

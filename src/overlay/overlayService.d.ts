@@ -1,4 +1,4 @@
-import { ComponentRef, ElementRef, Type } from "@angular/core";
+import { ComponentRef, ElementRef, Injectable, Type } from "@angular/core";
 import { Alignment } from "./positioning";
 export interface PopupOptions {
     alignWithElement?: ElementRef;
@@ -9,6 +9,7 @@ export interface OverlayHost {
     openComponentInPopup<T>(componentType: Type<T>, options: PopupOptions): Promise<ComponentRef<T>>;
 }
 /** Adds components in overlay to the HTML tree at position specified by `overlay-host` component. */
+@Injectable()
 export declare class OverlayService {
     private host;
     registerHost(hostComponent: OverlayHost): void;

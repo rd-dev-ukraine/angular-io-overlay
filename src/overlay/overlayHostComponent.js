@@ -13,11 +13,12 @@ var core_1 = require("@angular/core");
 var overlayComponent_1 = require("./overlayComponent");
 var overlayService_1 = require("./overlayService");
 var positioning_1 = require("./positioning");
-var OverlayHostComponent = OverlayHostComponent_1 = (function () {
+var OverlayHostComponent = /** @class */ (function () {
     function OverlayHostComponent(overlayService, componentFactoryResolver) {
         this.overlayService = overlayService;
         this.componentFactoryResolver = componentFactoryResolver;
     }
+    OverlayHostComponent_1 = OverlayHostComponent;
     OverlayHostComponent.prototype.openComponentInPopup = function (componentType, options) {
         var _this = this;
         return Promise.resolve(this.componentFactoryResolver.resolveComponentFactory(overlayComponent_1.OverlayComponent))
@@ -112,21 +113,21 @@ var OverlayHostComponent = OverlayHostComponent_1 = (function () {
             height: window.innerHeight
         };
     };
+    __decorate([
+        core_1.ViewChild("container", { read: core_1.ViewContainerRef }),
+        __metadata("design:type", core_1.ViewContainerRef)
+    ], OverlayHostComponent.prototype, "container", void 0);
+    OverlayHostComponent = OverlayHostComponent_1 = __decorate([
+        core_1.Component({
+            selector: "overlay-host",
+            template: "<template #container></template>",
+            entryComponents: [overlayComponent_1.OverlayComponent]
+        }),
+        __metadata("design:paramtypes", [overlayService_1.OverlayService,
+            core_1.ComponentFactoryResolver])
+    ], OverlayHostComponent);
     return OverlayHostComponent;
+    var OverlayHostComponent_1;
 }());
-__decorate([
-    core_1.ViewChild("container", { read: core_1.ViewContainerRef }),
-    __metadata("design:type", core_1.ViewContainerRef)
-], OverlayHostComponent.prototype, "container", void 0);
-OverlayHostComponent = OverlayHostComponent_1 = __decorate([
-    core_1.Component({
-        selector: "overlay-host",
-        template: "<template #container></template>",
-        entryComponents: [overlayComponent_1.OverlayComponent]
-    }),
-    __metadata("design:paramtypes", [overlayService_1.OverlayService,
-        core_1.ComponentFactoryResolver])
-], OverlayHostComponent);
 exports.OverlayHostComponent = OverlayHostComponent;
-var OverlayHostComponent_1;
 //# sourceMappingURL=overlayHostComponent.js.map

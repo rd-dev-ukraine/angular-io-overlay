@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 /** Adds components in overlay to the HTML tree at position specified by `overlay-host` component. */
-var OverlayService = (function () {
+var OverlayService = /** @class */ (function () {
     function OverlayService() {
     }
     OverlayService.prototype.registerHost = function (hostComponent) {
@@ -41,10 +41,10 @@ var OverlayService = (function () {
         }
         return this.host.openComponentInPopup(componentType, opt);
     };
+    OverlayService = __decorate([
+        core_1.Injectable()
+    ], OverlayService);
     return OverlayService;
 }());
-OverlayService = __decorate([
-    core_1.Injectable()
-], OverlayService);
 exports.OverlayService = OverlayService;
 //# sourceMappingURL=overlayService.js.map

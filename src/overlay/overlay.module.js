@@ -10,28 +10,28 @@ var core_1 = require("@angular/core");
 var overlayService_1 = require("./overlayService");
 var overlayComponent_1 = require("./overlayComponent");
 var overlayHostComponent_1 = require("./overlayHostComponent");
-var OverlayModule = (function () {
+var OverlayModule = /** @class */ (function () {
     function OverlayModule() {
     }
+    OverlayModule = __decorate([
+        core_1.NgModule({
+            declarations: [
+                overlayComponent_1.OverlayComponent,
+                overlayHostComponent_1.OverlayHostComponent
+            ],
+            exports: [
+                overlayComponent_1.OverlayComponent,
+                overlayHostComponent_1.OverlayHostComponent
+            ],
+            providers: [
+                overlayService_1.OverlayService
+            ],
+            entryComponents: [
+                overlayComponent_1.OverlayComponent
+            ]
+        })
+    ], OverlayModule);
     return OverlayModule;
 }());
-OverlayModule = __decorate([
-    core_1.NgModule({
-        declarations: [
-            overlayComponent_1.OverlayComponent,
-            overlayHostComponent_1.OverlayHostComponent
-        ],
-        exports: [
-            overlayComponent_1.OverlayComponent,
-            overlayHostComponent_1.OverlayHostComponent
-        ],
-        providers: [
-            overlayService_1.OverlayService
-        ],
-        entryComponents: [
-            overlayComponent_1.OverlayComponent
-        ]
-    })
-], OverlayModule);
 exports.OverlayModule = OverlayModule;
 //# sourceMappingURL=overlay.module.js.map

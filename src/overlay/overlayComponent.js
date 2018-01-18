@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var OverlayComponent = (function () {
+var OverlayComponent = /** @class */ (function () {
     function OverlayComponent(componentFactoryResolver, elementRef) {
         this.componentFactoryResolver = componentFactoryResolver;
         this.elementRef = elementRef;
@@ -29,27 +29,27 @@ var OverlayComponent = (function () {
     OverlayComponent.prototype.ngOnInit = function () {
         this.completeComponentCreation && this.completeComponentCreation();
     };
+    __decorate([
+        core_1.ViewChild("container", { read: core_1.ViewContainerRef }),
+        __metadata("design:type", core_1.ViewContainerRef)
+    ], OverlayComponent.prototype, "container", void 0);
+    OverlayComponent = __decorate([
+        core_1.Component({
+            host: {
+                "[class.fixed]": "positionFixed",
+                "[style.left.px]": "left",
+                "[style.top.px]": "top"
+            },
+            selector: "overlay",
+            template: "<ng-template #container></ng-template>",
+            styles: [
+                "\n        :host {\n          position: absolute;\n          z-index: 100;\n        }\n\n        :host.fixed {\n          position: fixed;\n        }\n        "
+            ]
+        }),
+        __metadata("design:paramtypes", [core_1.ComponentFactoryResolver,
+            core_1.ElementRef])
+    ], OverlayComponent);
     return OverlayComponent;
 }());
-__decorate([
-    core_1.ViewChild("container", { read: core_1.ViewContainerRef }),
-    __metadata("design:type", core_1.ViewContainerRef)
-], OverlayComponent.prototype, "container", void 0);
-OverlayComponent = __decorate([
-    core_1.Component({
-        host: {
-            "[class.fixed]": "positionFixed",
-            "[style.left.px]": "left",
-            "[style.top.px]": "top"
-        },
-        selector: "overlay",
-        template: "<template #container></template>",
-        styles: [
-            "\n        :host {\n          position: absolute;\n          z-index: 100;\n        }\n\n        :host.fixed {\n          position: fixed;\n        }\n        "
-        ]
-    }),
-    __metadata("design:paramtypes", [core_1.ComponentFactoryResolver,
-        core_1.ElementRef])
-], OverlayComponent);
 exports.OverlayComponent = OverlayComponent;
 //# sourceMappingURL=overlayComponent.js.map
